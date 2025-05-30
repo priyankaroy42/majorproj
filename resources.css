@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  body {
+    color: #333;
+    line-height: 1.6;
+    text-align: center;
+    padding: 20px;
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: right center; /* Align the image to the right and center vertically */
+    background-size: contain; /* Adjust the size to fit within its container */
+    background-color:#F4E0AF; /* Optional: Add a matching background color */
+    height: 100vh; /* Ensures full-page height */
+    margin: 0; /* Removes default body margin */
+    background-position: right 300px; /* Right side and 50px down */
+    background-size: contain; 
+  
+  }
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hidden {
+    display: none;
+}
+
+#blog-list {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+  .home img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    }
+  .home:hover{
+    opacity: 30%;
+    display: flex;
+
+  }
+  
+    .choices {
+    display: flex; /* Use flexbox */
+    list-style: none;
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: center; /* Center-align content */
+    gap: 30px; /* Add space between items */
+    margin: 20px auto;
+    max-width: 1200px; /* Limit the maximum width */
+    opacity: 80%;
+    text-decoration: none;
+  
+  }
+  
+  /* Individual Choice Styling */
+  .choice {
+    text-decoration: none;
+  
+    width: calc(33.33% - 30px); /* 3 items per row with spacing */
+    background-color: #fff; /* White background for boxes */
+    border: 1px solid #dfe6e9; /* Light border for structure */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-decoration:none;
+  }
+  
+  
+  .choice img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+  .choice h3 {
+    font-size: 1.2rem;
+    color: #4a7c59;
+    margin-top: 10px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .choice:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 8px 12px palevioletred;
+  }
+  
+  .choice:hover h3 {
+    color: #6fae7e; 
+  }
+  
+  

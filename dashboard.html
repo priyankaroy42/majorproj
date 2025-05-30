@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        .sidebar a:hover {
+            background: #555;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        .cards {
+            display: flex;
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <a href="#">Home</a>
+        <a href="#">Analytics</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+    <div class="main-content">
+        <h1>Welcome to the Dashboard</h1>
+        <div class="cards">
+            <div class="card">Users: 1200</div>
+            <div class="card">Sales: $45,000</div>
+            <div class="card">Orders: 350</div>
+        </div>
+    </div>
+</body>
+</html>

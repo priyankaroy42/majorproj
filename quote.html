@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational Quotes</title>
+    <link rel="stylesheet" href="quote.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: powderblue;
+            padding: 20px;
+        }
+        .container {
+            font-family: cursive;
+     max-width: 600px;
+    background:whitesmoke;
+    padding: 20px;
+    margin: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+ .quote-box {
+            font-size: 18px;
+            margin: 20px 0;
+            font-family: cursive;
+            background-color: antiquewhite;
+        }
+        #author {
+            margin-top: 2rem;
+            font-weight: bold;
+            font-family: cursive;
+            color: #555;
+        }
+        .date-time {
+            font-size: 14px;
+            color: #777;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            opacity: 50%;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .date-time {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    font-weight: bold;
+    font-family: cursive;
+    font-size: 1rem;
+    color: #333;
+}
+
+       </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quotes....</h1>
+        <div class="quote-box">
+            <p id="quote">Loading...</p>
+            <p id="author"></p>
+        </div>
+        <button id="new-quote">New Quote</button>
+         </div>
+         <div class="date-time">
+            <p id="current-time"></p>
+        </div>
+    <script>
+        window.onload = function () {
+            const quoteText = document.getElementById("quote");
+            const authorText = document.getElementById("author");
+            const newQuoteBtn = document.getElementById("new-quote");
+            const timeText = document.getElementById("current-time");
+
+            const quotes = [
+                { quote: "Believe in yourself and all that you are.", author: "Christian D. Larson" },
+                { quote: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+                { quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
+                { quote: "Your time is limited, so don’t waste it living someone else’s life.", author: "Steve Jobs" },
+                { quote: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+                { quote: "Act as if what you do makes a difference. It does.", author: "William James" },
+                { quote: "Happiness depends upon ourselves.", author: "Aristotle" },
+                { quote: "It is never too late to be what you might have been.", author: "George Eliot" },
+                { quote: "What lies behind us and what lies before us are tiny matters compared to what lies within us.", author: "Ralph Waldo Emerson" },
+                { quote: "Dream big and dare to fail.", author: "Norman Vaughan" }
+            ];
+
+            function displayRandomQuote() {
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                quoteText.textContent = `"${quotes[randomIndex].quote}"`;
+                authorText.textContent = `- ${quotes[randomIndex].author}`;
+            }
+
+            function updateTime() {
+                const now = new Date();
+                timeText.textContent = now.toLocaleString();
+            }
+
+            newQuoteBtn.addEventListener("click", displayRandomQuote);
+            displayRandomQuote();  // Show a random quote when the page loads
+            setInterval(displayRandomQuote, 15000); // Change quote every 15 seconds
+            setInterval(updateTime, 1000); // Update time every second
+        };
+    </script>
+</body>
+</html>

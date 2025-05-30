@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Community</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #dff1eb, #f8bbd0);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #2e7d32;
+            margin-top: 10px;
+        }
+        .section {
+            background: #fce4ec;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        input, button, textarea {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 60px;
+            resize: none;
+        }
+        button {
+            background: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #388e3c;
+        }
+        .forum-posts, .chat-box, .members-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .forum-posts li, .chat-box p {
+            background: #e3f2fd;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            list-style: none;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 14px;
+            background: #388e3c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>Mental Health Community</header>
+
+<div class="container">
+
+    <!-- Discussion Forum -->
+    <h2>Discussion Forum</h2>
+    <div class="section">
+        <textarea id="forum-post" placeholder="Share your thoughts..."></textarea>
+        <button onclick="addPost()">Post</button>
+        <ul id="forum-list" class="forum-posts"></ul>
+    </div>
+
+    <!-- Members Section -->
+    <h2>Active Members</h2>
+    <div class="section">
+        <ul id="member-list" class="members-list">
+            <li>🧑 Alice (Therapist)</li>
+            <li>🧑 Bob (Support Seeker)</li>
+            <li>🧑 Charlie (Community Leader)</li>
+        </ul>
+    </div>
+
+    <!-- Chat Section -->
+    <h2>Live Chat</h2>
+    <div class="section">
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="chat-message" placeholder="Type a message..." onkeypress="sendMessage(event)">
+    </div>
+
+    <!-- Community Guidelines -->
+    <h2>Community Guidelines</h2>
+    <div class="section">
+        <ul>
+            <li>✔ Be kind and supportive.</li>
+            <li>✔ No hate speech or bullying.</li>
+            <li>✔ Stay mental health-focused.</li>
+            <li>✔ Seek professional help when needed.</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>© 2025 Mental Health Community | Support, Connect & Heal</footer>
+
+<script>
+    // Function to add a forum post
+    function addPost() {
+        let postText = document.getElementById("forum-post").value;
+        if (postText.trim() === "") return;
+
+        let postList = document.getElementById("forum-list");
+        let listItem = document.createElement("li");
+        listItem.textContent = postText;
+        postList.appendChild(listItem);
+
+        document.getElementById("forum-post").value = "";
+    }
+
+    // Function to send chat messages
+    function sendMessage(event) {
+        if (event.key === "Enter") {
+            let message = document.getElementById("chat-message").value;
+            if (message.trim() === "") return;
+
+            let chatBox = document.getElementById("chat-box");
+            let newMessage = document.createElement("p");
+            newMessage.textContent = "You: " + message;
+            chatBox.appendChild(newMessage);
+
+            document.getElementById("chat-message").value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Quiz</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url("images/img.jpg");
+    background-size: contain;  /* Ensures the image covers the screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+        .container {
+            font-family: cursive;
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            padding: 25px;
+            justify-content: center;
+            opacity: 80%;
+            border-radius: 12px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        .progress {
+            width: 100%;
+            height: 12px;
+            background: #ccc;
+            border-radius: 6px;
+            margin: 15px 0;
+            position: relative;
+        }
+        .progress-bar {
+            margin-top: 3rem;
+            height: 12px;
+            background: #4caf50;
+            width: 0%;
+            border-radius: 6px;
+            transition: width 0.4s ease-in-out;
+        }
+        .question {
+            margin-top: 2rem;
+            font-size: 18px;
+            font-family: cursive;
+            margin-bottom: 10px;
+            color: brown;
+        }
+        .options {
+            margin-top: 3rem;
+            color: brown;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .options label {
+            font-size: 16px;
+            display: flex;
+            font-family: cursive;
+            align-items: center;
+            gap: 10px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+        button {
+            padding: 12px 12px;
+            font-family: cursive;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            gap: 5rem;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #388e3c;
+            opacity: 50%;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Lets start....</h2>
+        <div class="progress">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div id="quiz"></div>
+        <div class="button-group">
+            <button id="prevBtn" onclick="prevQuestion()">Previous</button>
+            <button id="nextBtn" onclick="nextQuestion()">Next</button>
+        </div>
+        <div id="result">
+            <canvas id="resultChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "How often do you feel happy?", cat: "Happy" },
+            { q: "Do you frequently feel stressed?", cat: "Stressed" },
+            { q: "How often do you feel anxious about the future?", cat: "Anxious" },
+            { q: "Do you have trouble sleeping?", cat: "Tired" },
+            { q: "Do you enjoy your daily activities?", cat: "Happy" },
+            { q: "How often do you feel overwhelmed?", cat: "Stressed" },
+            { q: "Do you have a support system?", cat: "Happy" },
+            { q: "Do you experience mood swings?", cat: "Anxious" },
+            { q: "Do you feel lonely often?", cat: "Sad" },
+            { q: "How well do you manage stress?", cat: "Stressed" },
+            { q: "Do you have trouble concentrating?", cat: "Tired" },
+            { q: "How often do you feel motivated?", cat: "Happy" },
+            { q: "Do you get irritated easily?", cat: "Anxious" },
+            { q: "Do you take time for self-care?", cat: "Happy" },
+            { q: "Do you feel like you're making progress in life?", cat: "Happy" }
+        ];
+
+        let currentQuestion = 0;
+        let scores = { Happy: 0, Stressed: 0, Anxious: 0, Sad: 0, Tired: 0 };
+
+        function loadQuestion() {
+            if (currentQuestion >= questions.length) {
+                showResults();
+                return;
+            }
+            document.getElementById("quiz").innerHTML = `
+                <div class="question">${questions[currentQuestion].q}</div>
+                <div class="options">
+                    <label><input type="radio" name="answer" value="1"> Never</label>
+                    <label><input type="radio" name="answer" value="2"> Sometimes</label>
+                    <label><input type="radio" name="answer" value="3"> Often</label>
+                    <label><input type="radio" name="answer" value="4"> Always</label>
+                </div>
+            `;
+            document.getElementById("progress-bar").style.width = (currentQuestion / questions.length) * 100 + "%";
+        }
+
+        function nextQuestion() {
+            let answer = document.querySelector("input[name='answer']:checked");
+            if (!answer) return alert("Please select an answer");
+            
+            scores[questions[currentQuestion].cat] += parseInt(answer.value);
+            currentQuestion++;
+            loadQuestion();
+        }
+        
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById("quiz").style.display = "none";
+            document.getElementById("prevBtn").style.display = "none";
+            document.getElementById("nextBtn").style.display = "none";
+            document.getElementById("result").style.display = "block";
+            
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(scores),
+                    datasets: [{
+                        data: Object.values(scores),
+                        backgroundColor: ['#4caf50', '#ff9800', '#f44336', '#3f51b5', '#9c27b0']
+                    }]
+                }
+            });
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
